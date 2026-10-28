@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Item Details | Alliance University Lost &amp; Found</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f9fd;color:#164579}.header{height:72px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 30px;border-bottom:1px solid #d8e3ed}.logo{width:145px;height:58px;object-fit:contain}.navbar{min-height:38px;display:flex;flex-wrap:wrap;align-items:stretch;padding-left:18px;background:#e9f2fb;border-bottom:1px solid #ccdce9}.navbar a{display:flex;align-items:center;padding:10px 20px;color:#164f86;text-decoration:none;font-size:12px;border-right:1px solid #d1dfeb}.navbar a:hover{background:#dceaf7}.container{width:min(900px,calc(100% - 32px));margin:36px auto}.card{background:#fff;border:1px solid #d8e3ed;border-radius:8px;padding:28px;box-shadow:0 4px 16px #16457912}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px}h1{margin:0;font-size:26px}.button{display:inline-block;border:1px solid #15558e;border-radius:4px;background:#15558e;color:#fff;padding:10px 16px;font-weight:bold;text-decoration:none;cursor:pointer}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{padding:13px;background:#f5f9fd;border-radius:5px;overflow-wrap:anywhere}.field strong{display:block;font-size:12px;text-transform:uppercase;color:#55728c;margin-bottom:7px}.field p{margin:0;white-space:pre-wrap;line-height:1.5}.wide{grid-column:1/-1}#detail-image{display:block;max-width:100%;max-height:420px;object-fit:contain;margin-top:10px;border-radius:5px}#itemError{display:none;color:#b42323;background:#fff2f0;border:1px solid #ffccc7;padding:16px;border-radius:5px;margin-bottom:16px}footer{text-align:center;padding:22px;color:#607890;font-size:12px}@media(max-width:600px){.header{padding:0 14px}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.container{margin:20px auto}.card{padding:18px}.top{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header class="header"><a href="index.html"><img src="logo.png" alt="Alliance University Logo" class="logo"></a><strong>Lost &amp; Found Portal</strong></header>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="lost.html">Report Lost</a>
+    <a href="found.html">Report Found</a>
+    <a href="matches.html">Matches Found</a>
+    <a href="map.html">Campus Map</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <main class="container">
+    <div class="top"><h1>Item Details</h1><button id="backButton" class="button" type="button">Back</button></div>
+    <div id="itemError" role="alert"></div>
+    <section id="itemDetails" class="card" hidden>
+      <div class="grid">
+        <div class="field"><strong>Name</strong><p id="detail-itemName"></p></div>
+        <div class="field"><strong>Category</strong><p id="detail-category"></p></div>
+        <div class="field"><strong>Lost / Found</strong><p id="detail-type"></p></div>
+        <div class="field"><strong>Date</strong><p id="detail-date"></p></div>
+        <div class="field"><strong>Location</strong><p id="detail-location"></p></div>
+        <div class="field"><strong>Current Status</strong><p id="detail-status"></p></div>
+        <div class="field wide"><strong>Description</strong><p id="detail-description"></p></div>
+        <div class="field wide"><strong>Image</strong><p id="imageUnavailable">No image provided.</p><img id="detail-image" hidden></div>
+      </div>
+    </section>
+  </main>
+  <footer>Alliance University | Lost &amp; Found Portal</footer>
+  <script src="portal.js"></script>
+</body>
+</html>

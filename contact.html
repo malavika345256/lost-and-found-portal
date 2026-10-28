@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact | Alliance University Lost & Found</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8fc;
+            color: #1f2937;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 82px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 55px;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+        }
+
+        .brand-text h2 {
+            color: #123b68;
+            font-size: 21px;
+        }
+
+        .brand-text p {
+            color: #777;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .login-buttons a {
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .student-login {
+            color: #123b68;
+            border: 1px solid #123b68;
+        }
+
+        .admin-login {
+            background: #123b68;
+            color: white;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            background: #123b68;
+            height: 52px;
+            padding: 0 55px;
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 17px 20px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: #0d2c4f;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 92%;
+            max-width: 1150px;
+            margin: 45px auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .page-title h1 {
+            color: #123b68;
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /* ================= CONTACT LAYOUT ================= */
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 25px;
+        }
+
+        /* ================= CONTACT INFO ================= */
+
+        .contact-info {
+            background: #123b68;
+            color: white;
+            border-radius: 14px;
+            padding: 35px;
+        }
+
+        .contact-info h2 {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .contact-info > p {
+            color: #dbe7f5;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: flex-start;
+        }
+
+        .info-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-item h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            color: #dbe7f5;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* ================= FORM ================= */
+
+        .contact-form {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 35px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .contact-form h2 {
+            color: #123b68;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .contact-form > p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            outline: none;
+            font-size: 14px;
+            color: #374151;
+            background: white;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #123b68;
+            box-shadow: 0 0 0 3px rgba(18,59,104,0.08);
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            background: #123b68;
+            color: white;
+            padding: 13px;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #0d2c4f;
+        }
+
+        /* ================= SUCCESS ================= */
+
+        .success-message {
+            display: none;
+            background: #dcfce7;
+            color: #166534;
+            padding: 12px;
+            border-radius: 7px;
+            margin-bottom: 18px;
+            font-size: 14px;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* ================= FAQ ================= */
+
+        .faq-section {
+            margin-top: 35px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 30px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            color: #123b68;
+            margin-bottom: 25px;
+        }
+
+        .faq {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 17px 0;
+        }
+
+        .faq:last-child {
+            border-bottom: none;
+        }
+
+        .faq h3 {
+            color: #374151;
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .faq p {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 50px;
+            background: #123b68;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            font-size: 13px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            header {
+                padding: 15px 20px;
+                height: auto;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                padding: 0 10px;
+                overflow-x: auto;
+            }
+
+            nav a {
+                white-space: nowrap;
+                padding: 17px 13px;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            .container {
+                width: 94%;
+                margin: 30px auto;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 25px;
+            }
+
+            .page-title h1 {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="brand">
+
+            <img src="logo.png"
+                 alt="Alliance University Logo"
+                 class="logo">
+
+            <div class="brand-text">
+
+                <h2>Alliance University</h2>
+
+                <p>Lost & Found Portal</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="login-buttons">
+
+            <a href="login.html"
+               class="student-login">
+                Student Login
+            </a>
+
+            <a href="#"
+               class="admin-login">
+                Admin Login
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+    <a href="index.html">Home</a>
+    <a href="lost.html">Report Lost</a>
+    <a href="found.html">Report Found</a>
+    <a href="matches.html">Matches Found</a>
+    <a href="map.html">Campus Map</a>
+    <a href="contact.html" class="active" aria-current="page">Contact</a>
+  </nav>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <div class="page-title">
+
+            <h1>Contact Us</h1>
+
+            <p>
+                Need help with a Lost or Found item? We're here to assist you.
+            </p>
+
+        </div>
+
+
+
+        <div class="contact-wrapper">
+
+
+            <!-- ================= CONTACT INFORMATION ================= -->
+
+            <div class="contact-info">
+
+                <h2>Get in Touch</h2>
+
+                <p>
+                    If you have questions about reporting, searching,
+                    or claiming a lost item, contact the Lost & Found
+                    support team.
+                </p>
+
+
+                <div class="info-item">
+
+                    <div class="info-icon">
+                        📍
+                    </div>
+
+                    <div>
+
+                        <h4>Campus</h4>
+
+                        <p>
+                            Alliance University<br>
+                            Bengaluru, Karnataka
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-icon">
+                        ✉
+                    </div>
+
+                    <div>
+
+                        <h4>Email</h4>
+
+                        <p>
+                            lostandfound@alliance.edu.in
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-icon">
+                        ☎
+                    </div>
+
+                    <div>
+
+                        <h4>Support</h4>
+
+                        <p>
+                            Lost & Found Help Desk<br>
+                            Monday – Friday
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-icon">
+                        🕐
+                    </div>
+
+                    <div>
+
+                        <h4>Working Hours</h4>
+
+                        <p>
+                            9:00 AM – 5:00 PM
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= CONTACT FORM ================= -->
+
+            <div class="contact-form">
+
+                <h2>Send a Message</h2>
+
+                <p>
+                    Fill out the form below and our team will get back to you.
+                </p>
+
+
+                <div id="successMessage"
+                     class="success-message">
+
+                    ✓ Your message has been submitted successfully.
+
+                </div>
+
+
+                <form id="contactForm">
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter your name"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                                required>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="subject">
+                            Subject
+                        </label>
+
+                        <select id="subject"
+                                required>
+
+                            <option value="">
+                                Select a subject
+                            </option>
+
+                            <option value="Lost Item">
+                                Lost Item
+                            </option>
+
+                            <option value="Found Item">
+                                Found Item
+                            </option>
+
+                            <option value="Claim Item">
+                                Claim an Item
+                            </option>
+
+                            <option value="Report Issue">
+                                Report an Issue
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="message">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            placeholder="Write your message here..."
+                            required></textarea>
+
+                    </div>
+
+
+
+                    <button type="submit"
+                            class="submit-btn">
+
+                        Send Message
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= FAQ ================= -->
+
+        <section class="faq-section">
+
+            <h2>Frequently Asked Questions</h2>
+
+
+            <div class="faq">
+
+                <h3>
+                    How do I report a lost item?
+                </h3>
+
+                <p>
+                    Go to the Report Lost page and provide the item details,
+                    location, date and your contact information.
+                </p>
+
+            </div>
+
+
+            <div class="faq">
+
+                <h3>
+                    How do I report an item I found?
+                </h3>
+
+                <p>
+                    Select Report Found from the navigation menu and submit
+                    the details of the item you found.
+                </p>
+
+            </div>
+
+
+            <div class="faq">
+
+                <h3>
+                    How can I search for my lost item?
+                </h3>
+
+                <p>
+                    Use the Search Items page to search submitted Lost and
+                    Found reports by item name, category and type.
+                </p>
+
+            </div>
+
+
+            <div class="faq">
+
+                <h3>
+                    How can I check my submitted reports?
+                </h3>
+
+                <p>
+                    Open the My Reports page to view the reports stored
+                    through the portal.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        © 2026 Alliance University Lost & Found Portal
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="portal.js"></script>
+
+
+</body>
+
+</html>

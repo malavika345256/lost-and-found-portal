@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Search Items | Lost & Found Portal</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f9fd;
+            color: #164579;
+        }
+
+        /* HEADER */
+        .header {
+            height: 72px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            border-bottom: 1px solid #d8e3ed;
+        }
+
+        .logo {
+            width: 145px;
+            height: 58px;
+            object-fit: contain;
+        }
+
+        .login-area {
+            display: flex;
+            gap: 8px;
+        }
+
+        .login-btn {
+            padding: 8px 14px;
+            border: 1px solid #15558e;
+            border-radius: 3px;
+            background: white;
+            color: #15558e;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .admin-btn {
+            background: #15558e;
+            color: white;
+        }
+
+        /* NAVIGATION */
+        .navbar {
+            height: 38px;
+            display: flex;
+            align-items: stretch;
+            padding-left: 18px;
+            background: #e9f2fb;
+            border-bottom: 1px solid #ccdce9;
+        }
+
+        .navbar a {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            color: #164f86;
+            text-decoration: none;
+            font-size: 11px;
+            border-right: 1px solid #d1dfeb;
+        }
+
+        .navbar a:hover {
+            background: #dcebf7;
+        }
+
+        .navbar a.active {
+            background: #15558e;
+            color: white;
+        }
+
+        /* MAIN */
+        .page {
+            min-height: calc(100vh - 150px);
+            padding: 30px 5%;
+        }
+
+        .page-title {
+            max-width: 1100px;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        .page-title h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
+            color: #164579;
+            margin-bottom: 6px;
+        }
+
+        .page-title p {
+            font-size: 13px;
+            color: #607890;
+        }
+
+        /* SEARCH BOX */
+        .search-card {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            border: 1px solid #d3e0eb;
+            box-shadow: 0 4px 15px rgba(30, 70, 100, 0.08);
+        }
+
+        .search-header {
+            padding: 14px 20px;
+            background: #eaf3fb;
+            border-bottom: 1px solid #d3e0eb;
+        }
+
+        .search-header h2 {
+            font-size: 17px;
+            color: #164f86;
+        }
+
+        .search-body {
+            padding: 20px;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 10px;
+            align-items: end;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: bold;
+            color: #294a68;
+            margin-bottom: 5px;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #cbd8e4;
+            border-radius: 4px;
+            padding: 0 10px;
+            font-size: 12px;
+            color: #304d68;
+            outline: none;
+            background: white;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            border-color: #15558e;
+        }
+
+        .search-btn {
+            height: 40px;
+            padding: 0 18px;
+            border: none;
+            border-radius: 4px;
+            background: #15558e;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .search-btn:hover {
+            background: #0d416d;
+        }
+
+        /* RESULTS */
+        .results-section {
+            max-width: 1100px;
+            margin: 20px auto 0;
+        }
+
+        .results-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .results-title h2 {
+            font-size: 17px;
+            color: #164f86;
+        }
+
+        #resultCount {
+            font-size: 11px;
+            color: #71869a;
+        }
+
+        .results-table {
+            background: white;
+            border: 1px solid #d3e0eb;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #eaf3fb;
+            color: #315879;
+            text-align: left;
+            padding: 11px;
+            font-size: 11px;
+            border-bottom: 1px solid #d3e0eb;
+        }
+
+        td {
+            padding: 11px;
+            font-size: 11px;
+            color: #405d76;
+            border-bottom: 1px solid #e3ebf2;
+        }
+
+        tr:hover {
+            background: #f8fbfe;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .lost {
+            background: #fde1e1;
+            color: #b73535;
+        }
+
+        .found {
+            background: #dff3df;
+            color: #34823c;
+        }
+
+        .pending {
+            background: #fff1cc;
+            color: #936d00;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: #7a8d9f;
+            font-size: 12px;
+            display: none;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #164f86;
+            color: white;
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
+
+            .header {
+                padding: 10px;
+                height: auto;
+            }
+
+            .navbar {
+                overflow-x: auto;
+                padding-left: 0;
+            }
+
+            .navbar a {
+                white-space: nowrap;
+                padding: 0 15px;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .search-btn {
+                width: 100%;
+            }
+
+            .page {
+                padding: 25px 15px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <img
+            src="logo.png"
+            alt="Alliance University Logo"
+            class="logo"
+        >
+
+        <div class="login-area">
+
+            <button
+                class="login-btn"
+                onclick="window.location.href='login.html'"
+            >
+                Student Login
+            </button>
+
+            <button
+                class="login-btn admin-btn"
+                onclick="window.location.href='admin.html'"
+            >
+                Admin Login
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="lost.html">Report Lost</a>
+    <a href="found.html">Report Found</a>
+    <a href="matches.html">Matches Found</a>
+    <a href="map.html">Campus Map</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+
+    <!-- MAIN -->
+    <main class="page">
+
+        <div class="page-title">
+
+            <h1>Search Lost & Found Items</h1>
+
+            <p>
+                Search reported items by name, category, or status.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH CARD -->
+        <section class="search-card">
+
+            <div class="search-header">
+                <h2>Find an Item</h2>
+            </div>
+
+            <div class="search-body">
+
+                <div class="filters">
+
+                    <div class="filter-group">
+
+                        <label for="searchInput">
+                            Search Item
+                        </label>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Example: iPhone, wallet, ID card..."
+                        >
+
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="statusFilter">Report Status</label>
+                        <select id="statusFilter"><option value="all">All Statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="resolved">Resolved</option></select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="dateFrom">From</label><input type="date" id="dateFrom">
+                        <label for="dateTo">To</label><input type="date" id="dateTo">
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="categoryFilter">
+                            Category
+                        </label>
+
+                        <select id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="College ID Card">College ID Card</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Mobile Phone">Mobile Phone</option>
+                            <option value="Tablet">Tablet</option>
+                            <option value="Charger and Electronics Accessories">Charger and Electronics Accessories</option>
+                            <option value="Headphones and Earbuds">Headphones and Earbuds</option>
+                            <option value="Wallet and Purse">Wallet and Purse</option>
+                            <option value="Keys">Keys</option>
+                            <option value="Backpack and Handbag">Backpack and Handbag</option>
+                            <option value="Books and Notebooks">Books and Notebooks</option>
+                            <option value="Documents and Certificates">Documents and Certificates</option>
+                            <option value="Exam Hall Ticket">Exam Hall Ticket</option>
+                            <option value="University Access Card">University Access Card</option>
+                            <option value="Student Bus Pass">Student Bus Pass</option>
+                            <option value="Water Bottle">Water Bottle</option>
+                            <option value="Lunch Box">Lunch Box</option>
+                            <option value="Watch">Watch</option>
+                            <option value="Jewellery">Jewellery</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Spectacles">Spectacles</option>
+                            <option value="Calculator">Calculator</option>
+                            <option value="USB Drive and Storage Devices">USB Drive and Storage Devices</option>
+                            <option value="Sports Equipment">Sports Equipment</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="typeFilter">
+                            Type
+                        </label>
+
+                        <select id="typeFilter">
+
+                            <option value="all">
+                                Lost & Found
+                            </option>
+
+                            <option value="lost">
+                                Lost
+                            </option>
+
+                            <option value="found">
+                                Found
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        class="search-btn"
+                        onclick="searchItems()"
+                    >
+                        Search
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULTS -->
+        <section class="results-section">
+
+            <div class="results-title">
+
+                <h2>Reported Items</h2>
+
+                <span id="resultCount">
+                    0 items
+                </span>
+
+            </div>
+
+
+            <div class="results-table">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Report ID</th>
+                            <th>Item</th>
+                            <th>Category</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Review / Recovery</th>
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="resultsBody"></tbody>
+
+                </table>
+
+
+                <div
+                    id="noResults"
+                    class="no-results"
+                >
+                    No matching items found.
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div>
+            Alliance University | Lost &amp; Found Portal
+        </div>
+
+        <div>
+            Copyright © 2026 Alliance University.
+            All rights reserved.
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="portal.js"></script>
+
+</body>
+</html>

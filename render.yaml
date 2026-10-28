@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: lost-and-found-portal
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGODB_URI
+        sync: false
+      - key: COOKIE_SECURE
+        value: "true"

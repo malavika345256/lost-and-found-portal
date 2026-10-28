@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Report Lost Item | Alliance University</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8fc;
+            color: #1f2937;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 82px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 55px;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+        }
+
+        .brand-text h2 {
+            color: #123b68;
+            font-size: 21px;
+        }
+
+        .brand-text p {
+            color: #777;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .login-buttons a {
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .student-login {
+            color: #123b68;
+            border: 1px solid #123b68;
+        }
+
+        .admin-login {
+            background: #123b68;
+            color: white;
+        }
+
+        /* ================= NAVIGATION ================= */
+
+        nav {
+            height: 52px;
+            background: #123b68;
+            padding: 0 55px;
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 17px 20px;
+            font-size: 14px;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: #0d2c4f;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 92%;
+            max-width: 950px;
+            margin: 40px auto;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            color: #123b68;
+            font-size: 32px;
+            margin-bottom: 7px;
+        }
+
+        .page-title p {
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 35px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            color: #123b68;
+            font-size: 19px;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            color: #374151;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            outline: none;
+            font-size: 14px;
+            color: #374151;
+            background: white;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #123b68;
+            box-shadow: 0 0 0 3px rgba(18,59,104,0.08);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .upload-preview { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 12px; }
+        .upload-preview img { width: 64px; height: 64px; object-fit: cover; border-radius: 4px; }
+        .upload-error { color: #b42323; }
+
+        .helper-text {
+            display: block;
+            margin-top: 6px;
+            color: #888;
+            font-size: 11px;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .cancel-btn,
+        .submit-btn {
+            padding: 12px 24px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background: white;
+            color: #123b68;
+            border: 1px solid #123b68;
+        }
+
+        .submit-btn {
+            background: #123b68;
+            color: white;
+            border: none;
+        }
+
+        .cancel-btn:hover {
+            background: #f1f5f9;
+        }
+
+        .submit-btn:hover {
+            background: #0d2c4f;
+        }
+
+        /* ================= SUCCESS ================= */
+
+        .success-message {
+            display: none;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+            padding: 13px;
+            border-radius: 7px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 50px;
+            background: #123b68;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            font-size: 13px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                height: auto;
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                padding: 0 10px;
+                overflow-x: auto;
+            }
+
+            nav a {
+                white-space: nowrap;
+                padding: 17px 13px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-card {
+                padding: 25px 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .cancel-btn,
+            .submit-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="brand">
+
+            <img src="logo.png"
+                 alt="Alliance University Logo"
+                 class="logo">
+
+            <div class="brand-text">
+
+                <h2>Alliance University</h2>
+
+                <p>Lost & Found Portal</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="login-buttons">
+
+            <a href="login.html"
+               class="student-login">
+
+                Student Login
+
+            </a>
+
+            <a href="#"
+               class="admin-login">
+
+                Admin Login
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+    <a href="index.html">Home</a>
+    <a href="lost.html" class="active" aria-current="page">Report Lost</a>
+    <a href="found.html">Report Found</a>
+    <a href="matches.html">Matches Found</a>
+    <a href="map.html">Campus Map</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <div class="page-title">
+
+            <h1>Report a Lost Item</h1>
+
+            <p>
+                Provide the details below to help us identify and recover your lost item.
+            </p>
+
+        </div>
+
+
+        <div class="form-card">
+
+
+            <!-- SUCCESS MESSAGE -->
+
+            <div id="successMessage"
+                 class="success-message">
+
+                ✓ Your lost item has been reported successfully.
+
+            </div>
+
+
+                <form id="lostForm" data-report-type="lost">
+
+
+                <!-- ITEM DETAILS -->
+
+                <div class="form-section">
+
+                    <h2>Item Details</h2>
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="itemName">
+                                Item Name <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="itemName"
+                                placeholder="Example: Black Wallet"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="category">
+                                Category <span class="required">*</span>
+                            </label>
+
+                            <select id="category" required>
+                                <option value="">Select category</option>
+                                <option value="College ID Card">College ID Card</option>
+                                <option value="Laptop">Laptop</option>
+                                <option value="Mobile Phone">Mobile Phone</option>
+                                <option value="Tablet">Tablet</option>
+                                <option value="Charger and Electronics Accessories">Charger and Electronics Accessories</option>
+                                <option value="Headphones and Earbuds">Headphones and Earbuds</option>
+                                <option value="Wallet and Purse">Wallet and Purse</option>
+                                <option value="Keys">Keys</option>
+                                <option value="Backpack and Handbag">Backpack and Handbag</option>
+                                <option value="Books and Notebooks">Books and Notebooks</option>
+                                <option value="Documents and Certificates">Documents and Certificates</option>
+                                <option value="Exam Hall Ticket">Exam Hall Ticket</option>
+                                <option value="University Access Card">University Access Card</option>
+                                <option value="Student Bus Pass">Student Bus Pass</option>
+                                <option value="Water Bottle">Water Bottle</option>
+                                <option value="Lunch Box">Lunch Box</option>
+                                <option value="Watch">Watch</option>
+                                <option value="Jewellery">Jewellery</option>
+                                <option value="Clothing">Clothing</option>
+                                <option value="Spectacles">Spectacles</option>
+                                <option value="Calculator">Calculator</option>
+                                <option value="USB Drive and Storage Devices">USB Drive and Storage Devices</option>
+                                <option value="Sports Equipment">Sports Equipment</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="dateLost">
+                                Date Lost <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="date"
+                                id="dateLost"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="locationLost">
+                                Location Lost <span class="required">*</span>
+                            </label>
+
+                            <input type="text" id="locationLost" list="campusLocations" placeholder="Choose or enter a campus location" required>
+                            <datalist id="campusLocations">
+                                <option value="Academic Block"></option>
+                                <option value="Library"></option>
+                                <option value="Classroom"></option>
+                                <option value="Computer Lab"></option>
+                                <option value="Cafeteria"></option>
+                                <option value="Auditorium"></option>
+                                <option value="Seminar Hall"></option>
+                                <option value="Sports Ground"></option>
+                                <option value="Parking Area"></option>
+                                <option value="Hostel"></option>
+                                <option value="University Bus"></option>
+                                <option value="Administrative Office"></option>
+                                <option value="Student Affairs Office"></option>
+                                <option value="Other campus location"></option>
+                            </datalist>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="description">
+                            Item Description <span class="required">*</span>
+                        </label>
+
+                        <textarea
+                            id="description"
+                            placeholder="Describe the item, colour, brand, identifying marks, etc."
+                            required></textarea>
+
+                    </div>
+
+                    <div class="form-group" id="cardVerificationGroup" hidden>
+                        <label for="privateVerification">Private card verification details (administrator only)</label>
+                        <textarea id="privateVerification" maxlength="1000" placeholder="Optional: describe a distinguishing mark or issuer. Do not enter the full card number, barcode, or QR contents."></textarea>
+                        <span class="hint">Only administrators can view this information. Ownership is confirmed through the private claim review process.</span>
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="itemImage">
+                            Upload Item Image
+                        </label>
+
+                        <input
+                            type="file"
+                            id="itemImage"
+                            name="image"
+                            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+
+                        <div class="upload-preview" id="imagePreview" hidden>
+                            <span id="imageFilename"></span>
+                            <img id="imagePreviewImg" alt="Selected item image preview">
+                        </div>
+                        <div class="helper-text upload-error" id="imageError" role="alert" hidden></div>
+
+                        <span class="helper-text">
+                            Upload a clear image if available (JPG, PNG, or WEBP, up to 5 MB). Do not upload ID or access card images.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONTACT DETAILS -->
+
+                <div class="form-section">
+
+                    <h2>Your Contact Details</h2>
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="contactName">
+                                Your Name <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="contactName"
+                                placeholder="Enter your full name"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="contact">
+                                Contact Number <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="contact"
+                                placeholder="Enter your phone number"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="button-group">
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        onclick="window.location.href='index.html'">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="submit-btn">
+
+                        Submit Lost Report
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        © 2026 Alliance University Lost & Found Portal
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="portal.js"></script>
+
+
+</body>
+
+</html>

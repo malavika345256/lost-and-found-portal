@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Panel Access</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #f6efff 0%, #f0f5ff 45%, #e8f6ff 100%);
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 500px;
+}
+
+h1 {
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+
+.options {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.option-btn {
+  padding: 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: white;
+}
+
+.option-user {
+  background: linear-gradient(135deg, #4e73df, #3a5ccc);
+}
+
+.option-user:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(78, 115, 223, 0.3);
+}
+
+.option-admin {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+}
+
+.option-admin:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+}
+
+.back-btn {
+  margin-top: 30px;
+}
+
+.back-btn a {
+  color: #4e73df;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.back-btn a:hover {
+  text-decoration: underline;
+}
+
+.icon {
+  font-size: 24px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🔐 Admin Panel Access</h1>
+  <p class="subtitle">Choose how you want to access the admin panel</p>
+  
+  <div class="options">
+    <button class="option-btn option-user" onclick="viewAsUser()">
+      <span class="icon">👁️</span>
+      <span>View as User</span>
+      <span style="font-size: 12px; margin-left: 5px;">(Read-only)</span>
+    </button>
+    
+    <button class="option-btn option-admin" onclick="goToLogin()">
+      <span class="icon">🔓</span>
+      <span>Login as Admin</span>
+      <span style="font-size: 12px; margin-left: 5px;">(Full Access)</span>
+    </button>
+  </div>
+  
+  <div class="back-btn">
+    <a href="index.html">← Back to Home</a>
+  </div>
+</div>
+
+<script>
+function viewAsUser() {
+  // Show the public item search page.
+  window.location.href = 'search.html';
+}
+
+function goToLogin() {
+  // Go to admin login page
+  window.location.href = 'admin.html';
+}
+</script>
+
+</body>
+</html>

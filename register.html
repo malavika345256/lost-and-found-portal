@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Lost & Found Portal</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.08),
+                    rgba(255, 255, 255, 0.08)
+                ),
+                url("campus.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            color: #173f69;
+        }
+
+
+        /* =========================
+           MAIN PAGE
+        ========================= */
+
+        .page {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            padding-left: 8%;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+
+        /* =========================
+           WRAPPER
+        ========================= */
+
+        .register-wrapper {
+            width: 420px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        /* =========================
+           LOGO OUTSIDE BOX
+        ========================= */
+
+        .logo-container {
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin-bottom: 14px;
+        }
+
+        .logo {
+            width: 210px;
+            height: auto;
+
+            object-fit: contain;
+
+            display: block;
+        }
+
+
+        /* =========================
+           REGISTER CARD
+        ========================= */
+
+        .register-card {
+            width: 420px;
+
+            background: rgba(255, 255, 255, 0.94);
+
+            border-radius: 9px;
+
+            padding: 25px 30px;
+
+            box-shadow:
+                0 7px 25px rgba(0, 0, 0, 0.20);
+
+            backdrop-filter: blur(3px);
+        }
+
+
+        /* =========================
+           HEADINGS
+        ========================= */
+
+        .title {
+            text-align: center;
+
+            font-size: 27px;
+            font-weight: 700;
+
+            color: #174d80;
+
+            margin-bottom: 3px;
+        }
+
+        .portal-title {
+            text-align: center;
+
+            font-size: 22px;
+            font-weight: 700;
+
+            color: #174d80;
+
+            margin-bottom: 9px;
+        }
+
+        .university {
+            text-align: center;
+
+            font-size: 15px;
+
+            color: #5d7892;
+
+            margin-bottom: 5px;
+        }
+
+        .description {
+            text-align: center;
+
+            font-size: 14px;
+            line-height: 1.4;
+
+            color: #5c748c;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 13px;
+        }
+
+        label {
+            display: block;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            color: #203f60;
+
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+
+            height: 46px;
+
+            border: 1px solid #c9d6e3;
+
+            border-radius: 6px;
+
+            padding: 0 13px;
+
+            font-size: 15px;
+
+            color: #243b53;
+
+            background: rgba(255, 255, 255, 0.95);
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #1765a0;
+
+            box-shadow:
+                0 0 0 2px rgba(23, 101, 160, 0.10);
+        }
+
+        input::placeholder {
+            color: #8aa0b5;
+        }
+
+
+        /* =========================
+           PASSWORD
+        ========================= */
+
+        .password-wrapper {
+            position: relative;
+
+            width: 100%;
+        }
+
+        .password-wrapper input {
+            padding-right: 50px;
+        }
+
+
+        /* =========================
+           EYE BUTTON
+        ========================= */
+
+        .eye-button {
+            position: absolute;
+
+            right: 7px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 38px;
+            height: 38px;
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 5px;
+        }
+
+        .eye-icon {
+            width: 21px;
+            height: 21px;
+
+            fill: none;
+
+            stroke: #173f69;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .eye-button:hover .eye-icon {
+            stroke: #0b5da7;
+        }
+
+
+        /* =========================
+           ERROR MESSAGES
+        ========================= */
+
+        .error-message {
+            display: none;
+
+            color: #d93025;
+
+            font-size: 12px;
+
+            margin-top: 5px;
+
+            line-height: 1.4;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .password-error {
+            display: none;
+
+            color: #d93025;
+
+            font-size: 12px;
+
+            margin-top: 5px;
+        }
+
+        .password-error.show {
+            display: block;
+        }
+
+        .success-message {
+            display: none;
+
+            color: #188038;
+
+            font-size: 13px;
+
+            text-align: center;
+
+            margin-top: 10px;
+        }
+
+
+        /* =========================
+           CREATE ACCOUNT BUTTON
+        ========================= */
+
+        .create-button {
+            width: 100%;
+
+            height: 46px;
+
+            margin-top: 3px;
+
+            border: none;
+
+            border-radius: 5px;
+
+            background: #17609a;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .create-button:hover {
+            background: #124d7d;
+        }
+
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        .login-section {
+            border-top: 1px solid #d9e1e8;
+
+            margin-top: 18px;
+
+            padding-top: 13px;
+
+            text-align: center;
+        }
+
+        .login-section p {
+            color: #71869a;
+
+            font-size: 14px;
+        }
+
+        .login-link {
+            color: #006ec8;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .page {
+                justify-content: center;
+
+                padding: 25px 15px;
+            }
+
+            .register-wrapper {
+                width: 100%;
+                max-width: 420px;
+            }
+
+            .register-card {
+                width: 100%;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .register-card {
+                padding: 22px 20px;
+            }
+
+            .logo {
+                width: 190px;
+            }
+
+            .title {
+                font-size: 25px;
+            }
+
+            .portal-title {
+                font-size: 21px;
+            }
+
+            .description {
+                font-size: 13px;
+            }
+
+            input {
+                height: 44px;
+            }
+
+            .create-button {
+                height: 44px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+    <div class="register-wrapper">
+
+
+        <!-- =========================
+             ALLIANCE LOGO
+             OUTSIDE THE WHITE BOX
+        ========================== -->
+
+        <div class="logo-container">
+
+            <img
+                src="logo.png"
+                alt="Alliance University Logo"
+                class="logo"
+            >
+
+        </div>
+
+
+        <!-- =========================
+             REGISTRATION BOX
+        ========================== -->
+
+        <div class="register-card">
+
+
+            <h1 class="title">
+                Create Your Account
+            </h1>
+
+            <h2 class="portal-title">
+                Lost &amp; Found Portal
+            </h2>
+
+            <p class="university">
+                Alliance University
+            </p>
+
+            <p class="description">
+                Register to report lost items, search found items and
+                manage your reports.
+            </p>
+
+
+            <!-- FULL NAME -->
+
+            <div class="form-group">
+
+                <label for="fullName">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- UNIVERSITY EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    University Email ID
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your university email ID"
+                    autocomplete="email"
+                    required
+                >
+
+                <div
+                    id="emailError"
+                    class="error-message"
+                >
+                    Please use your Alliance University email ID
+                    ending with @ced.alliance.edu.in
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="eye-button"
+                        onclick="togglePassword('password', this)"
+                    >
+
+                        <svg
+                            class="eye-icon"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"
+                            ></path>
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="3"
+                            ></circle>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="eye-button"
+                        onclick="togglePassword('confirmPassword', this)"
+                    >
+
+                        <svg
+                            class="eye-icon"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"
+                            ></path>
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="3"
+                            ></circle>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+                <div
+                    id="passwordError"
+                    class="password-error"
+                >
+                    Passwords do not match.
+                </div>
+
+            </div>
+
+
+            <!-- CREATE ACCOUNT -->
+
+            <button
+                type="button"
+                class="create-button"
+                onclick="registerUser()"
+            >
+                Create Account
+            </button>
+
+
+            <div
+                id="successMessage"
+                class="success-message"
+            >
+                Account created successfully!
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <div class="login-section">
+
+                <p>
+                    Already have an account?
+
+                    <a
+                        href="login.html"
+                        class="login-link"
+                    >
+                        Login
+                    </a>
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+<script src="portal.js"></script>
+</body>
+
+</html>

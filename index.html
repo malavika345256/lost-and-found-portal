@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alliance University - Lost &amp; Found</title>
+
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f9fd;
+            color: #164579;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* HEADER */
+        .header {
+            min-height: 64px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 30px;
+            border-bottom: 1px solid #d8e3ed;
+        }
+
+        .logo {
+            width: 190px;
+            max-height: 48px;
+            object-fit: contain;
+        }
+
+        .login-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .login-btn {
+            padding: 10px 18px;
+            border: 1px solid #15558e;
+            border-radius: 4px;
+            background: white;
+            color: #15558e;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .admin-btn {
+            background: #15558e;
+            color: white;
+        }
+
+        .login-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* NAVIGATION */
+        .navbar {
+            min-height: 52px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            padding-left: 18px;
+            background: #e9f2fb;
+            border-bottom: 1px solid #ccdce9;
+        }
+
+        .navbar a {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: #164f86;
+            border-right: 1px solid #d2dfeb;
+            font-size: 14px;
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            background: #315687;
+            color: white;
+        }
+
+        /* CAMPUS HERO */
+        .hero {
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            padding: 50px 10.5%;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(14, 43, 75, 0.48),
+                    rgba(14, 43, 75, 0.12)
+                ),
+                url("campus.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(34px, 4vw, 56px);
+            margin-bottom: 14px;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .primary-btn {
+            display: inline-block;
+            background: #315687;
+            color: white;
+            padding: 14px 24px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .primary-btn:hover {
+            background: #203f6b;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+            gap: 20px;
+            padding: 34px 3%;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #d5e1ec;
+            min-width: 0;
+        }
+
+        .panel-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 16px 20px;
+            background: #e9f2fb;
+            border-bottom: 1px solid #d5e1ec;
+        }
+
+        .panel-heading h2 {
+            font-size: 21px;
+            color: #315687;
+        }
+
+        .view-all {
+            color: #315687;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .view-all:hover {
+            text-decoration: underline;
+        }
+
+        /* REPORTS TABLE */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+
+        th,
+        td {
+            padding: 13px 12px;
+            text-align: left;
+            border-bottom: 1px solid #dce5ee;
+        }
+
+        th {
+            background: #f3f7fb;
+            color: #315687;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        td {
+            color: #526b87;
+        }
+
+        tbody tr:hover {
+            background: #f8fbff;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status.lost {
+            color: #b43b3b;
+            background: #f9e2e2;
+        }
+
+        .status.found {
+            color: #28733b;
+            background: #e2f2e2;
+        }
+
+        .details-link {
+            color: #24558c;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .details-link:hover {
+            text-decoration: underline;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 28px 15px;
+            color: #687d95;
+        }
+
+        /* IMPORTANT NOTICE */
+        .notice-content {
+            padding: 20px;
+            font-size: 13px;
+            color: #5c718a;
+            line-height: 1.7;
+        }
+
+        .notice-content p {
+            margin-bottom: 12px;
+        }
+
+        .contact-box {
+            background: #f3f7fb;
+            border-left: 4px solid #315687;
+            padding: 12px;
+            margin-bottom: 18px;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-box strong {
+            color: #315687;
+        }
+
+        .notice-content h3 {
+            margin-bottom: 7px;
+            color: #315687;
+            font-size: 17px;
+        }
+
+        .notice-content ul {
+            padding-left: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #315687;
+            color: white;
+            padding: 18px 25px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 45px 6%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                padding: 12px;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .logo {
+                width: 150px;
+            }
+
+            .login-btn {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .navbar {
+                padding-left: 0;
+            }
+
+            .navbar a {
+                padding: 12px;
+                font-size: 12px;
+            }
+
+            .hero {
+                min-height: 300px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .main-content {
+                padding: 20px 12px;
+            }
+
+            .panel-heading {
+                padding: 13px;
+            }
+
+            .panel-heading h2 {
+                font-size: 17px;
+            }
+
+            th,
+            td {
+                padding: 11px 9px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <a href="index.html">
+            <img src="logo.png" alt="Alliance University Logo" class="logo">
+        </a>
+
+        <div class="login-area">
+            <button class="login-btn" id="logoutButton" type="button">Logout</button>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+    <a href="index.html" class="active" aria-current="page">Home</a>
+    <a href="lost.html">Report Lost</a>
+    <a href="found.html">Report Found</a>
+    <a href="matches.html">Matches Found</a>
+    <a href="map.html">Campus Map</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Lost &amp; Found Portal</h1>
+
+            <p>
+                Report, search and recover lost items on campus.
+            </p>
+
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- RECENT REPORTS -->
+        <section class="panel">
+            <div class="panel-heading">
+                <h2>Recent Lost &amp; Found Items</h2>
+                <a href="search.html" class="view-all">
+                    View All Items →
+                </a>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Category</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="recentReportsBody">
+                        <tr>
+                            <td colspan="6" class="empty-message">
+                                Loading reports...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- IMPORTANT NOTICE -->
+        <aside class="panel">
+            <div class="panel-heading">
+                <h2>Important Notice</h2>
+            </div>
+
+            <div class="notice-content">
+                <p>
+                    For assistance or to collect verified items, please
+                    contact the Campus Administration at the Student
+                    Affairs Office.
+                </p>
+
+                <div class="contact-box">
+                    <p>
+                        <strong>Phone:</strong> +91 80 4619 1500
+                    </p>
+                    <p>
+                        <strong>Email:</strong> studentaffairs@alliance.edu.in
+                    </p>
+                    <p>
+                        <strong>Location:</strong> Central Campus,
+                        Alliance University, Bengaluru
+                    </p>
+                </div>
+
+                <h3>Guidelines</h3>
+                <ul>
+                    <li>Provide accurate item details and location.</li>
+                    <li>Keep your contact information up to date.</li>
+                    <li>Items will be verified before returning to the owner.</li>
+                    <li>For any disputes, contact the administration.</li>
+                </ul>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 Alliance University. All rights reserved.
+        | Lost &amp; Found Portal
+    </footer>
+
+    <script src="portal.js"></script>
+
+</body>
+</html>

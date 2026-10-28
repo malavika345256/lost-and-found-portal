@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Reports | Alliance University Lost & Found</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8fc;
+            color: #1f2937;
+        }
+
+        /* HEADER */
+        header {
+            height: 82px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 55px;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+        }
+
+        .brand-text h2 {
+            color: #123b68;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .brand-text p {
+            color: #777;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .login-buttons a {
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .student-login {
+            color: #123b68;
+            border: 1px solid #123b68;
+        }
+
+        .admin-login {
+            background: #123b68;
+            color: white;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: #123b68;
+            padding: 0 55px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 17px 20px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: #0d2c4f;
+        }
+
+        /* PAGE */
+        .container {
+            width: 92%;
+            max-width: 1250px;
+            margin: 40px auto;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            color: #123b68;
+            font-size: 32px;
+            margin-bottom: 7px;
+        }
+
+        .page-title p {
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /* SUMMARY CARDS */
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .summary-card h3 {
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .summary-card .number {
+            color: #123b68;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        /* REPORT BOX */
+        .reports-box {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+
+        .reports-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reports-header h2 {
+            color: #123b68;
+            font-size: 20px;
+        }
+
+        .clear-btn {
+            border: none;
+            background: #dc3545;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .clear-btn:hover {
+            background: #b52a37;
+        }
+
+        /* TABLE */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: #f4f7fb;
+            color: #374151;
+            font-size: 13px;
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        td {
+            padding: 15px;
+            font-size: 14px;
+            border-bottom: 1px solid #edf0f4;
+            color: #4b5563;
+        }
+
+        tr:hover td {
+            background: #fafcff;
+        }
+
+        .report-id {
+            color: #123b68;
+            font-weight: 700;
+        }
+
+        /* TYPE */
+        .type {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .lost {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .found {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        /* STATUS */
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .resolved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        /* EMPTY */
+        .empty {
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .empty-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .empty h3 {
+            color: #123b68;
+            margin-bottom: 8px;
+        }
+
+        .empty p {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .report-btn {
+            display: inline-block;
+            background: #123b68;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        .report-btn:hover {
+            background: #0d2c4f;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 50px;
+            background: #123b68;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+
+            header {
+                padding: 0 20px;
+            }
+
+            nav {
+                padding: 0 10px;
+                overflow-x: auto;
+            }
+
+            nav a {
+                white-space: nowrap;
+                padding: 17px 13px;
+            }
+
+            .summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                height: auto;
+                padding: 15px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .container {
+                width: 94%;
+                margin-top: 25px;
+            }
+
+            .page-title h1 {
+                font-size: 26px;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .login-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+
+        <div class="brand">
+
+            <img src="logo.png"
+                 alt="Alliance University Logo"
+                 class="logo">
+
+            <div class="brand-text">
+                <h2>Alliance University</h2>
+                <p>Lost & Found Portal</p>
+            </div>
+
+        </div>
+
+        <div class="login-buttons">
+
+            <a href="login.html"
+               class="student-login">
+                Student Login
+            </a>
+
+            <a href="#"
+               class="admin-login">
+                Admin Login
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- NAVIGATION -->
+    <nav>
+    <a href="index.html">Home</a>
+    <a href="lost.html">Report Lost</a>
+    <a href="found.html">Report Found</a>
+    <a href="matches.html">Matches Found</a>
+    <a href="map.html">Campus Map</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+
+    <!-- MAIN -->
+    <main class="container">
+
+        <div class="page-title">
+
+            <h1>My Reports</h1>
+
+            <p>
+                View the Lost and Found reports submitted through this portal.
+            </p>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+        <div class="summary">
+
+            <div class="summary-card">
+                <h3>Total Reports</h3>
+                <div class="number" id="totalReports">0</div>
+            </div>
+
+            <div class="summary-card">
+                <h3>Lost Reports</h3>
+                <div class="number" id="lostReports">0</div>
+            </div>
+
+            <div class="summary-card">
+                <h3>Found Reports</h3>
+                <div class="number" id="foundReports">0</div>
+            </div>
+
+            <div class="summary-card">
+                <h3>Pending Reports</h3>
+                <div class="number" id="pendingReports">0</div>
+            </div>
+
+        </div>
+
+
+        <!-- REPORTS -->
+        <div class="reports-box">
+
+            <div class="reports-header">
+
+                <h2>Submitted Reports</h2>
+
+                <button class="clear-btn"
+                        onclick="clearReports()">
+                    Refresh
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Report ID</th>
+
+                            <th>Item</th>
+
+                            <th>Category</th>
+
+                            <th>Location</th>
+
+                            <th>Date</th>
+
+                            <th>Type</th>
+
+                            <th>Review / Recovery</th>
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="reportTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- EMPTY MESSAGE -->
+
+            <div id="emptyMessage"
+                 class="empty"
+                 style="display:none;">
+
+                <div class="empty-icon">
+                    📋
+                </div>
+
+                <h3>No Reports Yet</h3>
+
+                <p>
+                    You haven't submitted any Lost or Found reports yet.
+                </p>
+
+                <a href="lost.html"
+                   class="report-btn">
+                    Report Lost Item
+                </a>
+
+                <a href="found.html"
+                   class="report-btn">
+                    Report Found Item
+                </a>
+
+            </div>
+
+        </div>
+
+        <section class="reports-box" id="myClaimsSection" style="margin-top:24px;">
+            <div class="reports-header"><h2>My Claims</h2></div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Found Item</th><th>Submitted</th><th>Your claim reason</th><th>Status / decision</th></tr></thead>
+                    <tbody id="myClaimsBody"></tbody>
+                </table>
+            </div>
+            <div id="myClaimsEmpty" class="empty" style="display:none;">You have not submitted any claims.</div>
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        © 2026 Alliance University Lost & Found Portal
+
+    </footer>
+
+
+    <script src="portal.js"></script>
+
+</body>
+</html>
