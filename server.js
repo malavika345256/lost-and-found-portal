@@ -7,7 +7,9 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
-require('dotenv').config();
+// Load local development settings from the project directory. Render supplies
+// its own process environment variables and does not need a .env file.
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const server = createServer(app);
@@ -497,6 +499,6 @@ app.get('/api/admin/contact-messages',auth,adminOnly,asyncRoute(async(req,res)=>
 app.use('/api', (req,res)=>res.status(404).json({message:'API endpoint not found.'}));
 app.use((err,req,res,next)=>{ console.error(err); if(err.type==='entity.too.large')return res.status(413).json({message:'Request is too large. Images must be 5 MB or smaller.'}); if(err.name==='ValidationError')return res.status(400).json({message:err.message}); if(err.code===11000)return res.status(409).json({message:'An account with this email already exists.'}); res.status(500).json({message:'Internal server error.'}); });
 
-async function start(){ if(!JWT_SECRET){console.error('JWT_SECRET must be set in .env');process.exit(1);} if(!MONGO_URI){console.error('MONGODB_URI must be set in production.');process.exit(1);} await mongoose.connect(MONGO_URI); await Promise.all([Notification.createIndexes(),PotentialMatch.createIndexes()]); console.log(`MongoDB connected: ${mongoose.connection.name}`); server.listen(PORT,'0.0.0.0',()=>console.log(`Portal listening on port ${PORT}`)); }
+async function start(){ if(!JWT_SECRET){console.error('JWT_SECRET must be set as an environment variable.');process.exit(1);} if(!MONGO_URI){console.error('MONGODB_URI must be set as an environment variable in production.');process.exit(1);} await mongoose.connect(MONGO_URI); await Promise.all([Notification.createIndexes(),PotentialMatch.createIndexes()]); console.log(`MongoDB connected: ${mongoose.connection.name}`); server.listen(PORT,'0.0.0.0',()=>console.log(`Portal listening on port ${PORT}`)); }
 if(require.main===module) start().catch(err=>{console.error('Startup failed:',err.message);process.exit(1);});
 module.exports={app,server,io,start,models:{User,Item,Claim,Conversation,Message,Notification,PotentialMatch,ContactMessage}};
